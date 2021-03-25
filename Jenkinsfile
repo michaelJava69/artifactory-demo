@@ -43,11 +43,11 @@ pipeline {
         }
         stage ('Publish build info') {
             steps {
-                rtPublishBuildInfo (
-                    buildName: JOB_NAME,
-                    buildNumber: BUILD_NUMBER,
-                    serverId: "${SERVER_ID}"
-                )
+               // rtPublishBuildInfo (
+               //     buildName: JOB_NAME,
+               //     buildNumber: BUILD_NUMBER,
+               //     serverId: "${SERVER_ID}"
+               // )
 
                 rtPublishBuildInfo (
                     buildName: JOB_NAME,
