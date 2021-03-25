@@ -1,5 +1,16 @@
 pipeline {
   agent any 
+
+  parameters {
+         
+        choice(name: 'SERVER_ID', 
+          choices: 'artifactory\nlocal',
+          description: 'What artifacts repository?')
+         
+          
+    }
+
+
   stages{
    stage('Build') {
        steps {
@@ -16,7 +27,7 @@ pipeline {
                 rtUpload (
                     buildName: JOB_NAME,
                     buildNumber: BUILD_NUMBER,
-                    serverId: SERVER_ID, // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
+                    serverId: "${SERVER_ID}", // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
                     spec: '''{
                               "files": [
                                  {
@@ -34,13 +45,13 @@ pipeline {
                 rtPublishBuildInfo (
                     buildName: JOB_NAME,
                     buildNumber: BUILD_NUMBER,
-                    serverId: SERVER_ID
+                    serverId: "${SERVER_ID}"
                 )
 
                 rtPublishBuildInfo (
                     buildName: JOB_NAME,
                     buildNumber: BUILD_NUMBER,
-                    serverId: SERVER_ID
+                    serverId: "${SERVER_ID}"
                 )
             }
         }
@@ -48,7 +59,7 @@ pipeline {
             steps {
                 rtAddInteractivePromotion (
                     //Mandatory parameter
-                    serverId: SERVER_ID,
+                    serverId: "${SERVER_ID}",
 
                     //Optional parameters
                     targetRepo: 'result/',
@@ -64,7 +75,7 @@ pipeline {
                 )
 
                 rtAddInteractivePromotion (
-                    serverId: SERVER_ID,
+                    serverId: "${SERVER_ID}",
                     buildName: JOB_NAME,
                     buildNumber: BUILD_NUMBER
                 )
