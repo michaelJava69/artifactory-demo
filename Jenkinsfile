@@ -82,11 +82,11 @@ pipeline {
                 )
             }
          }
-        // stage ('Removing files') {
-        //    steps {
-        //        sh 'rm -rf $WORKSPACE/*'
-        //    }
-        // }
+        stage ('Removing files') {
+            steps {
+                sh 'rm -rf $WORKSPACE/*'
+            }
+        }
          
         
   }
