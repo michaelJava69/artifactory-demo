@@ -18,6 +18,7 @@ pipeline {
           dir("test")
             {
              sh  'touch $WORKSPACE/Artifact_$BUILD_NUMBER'
+             sh 'echo "SERVER_ID is ${SERVER_ID}"'
             }
             }
           }
