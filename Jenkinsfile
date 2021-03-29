@@ -25,14 +25,29 @@ pipeline {
         }
          stage ('Upload') {
             steps {
+              
+              rtServer (
+                  id: 'artifactory-server',
+                  url: 'http://localhost:8082/artifactory',
+                  // If you're using username and password:
+                  // username: 'xxxx',
+                  // password: 'xxxxxxx',
+                  // If you're using Credentials ID:
+                  credentialsId: 'artifactory-id',
+                  // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
+                  // bypassProxy: true,
+                  // Configure the connection timeout (in seconds).
+                  // The default value (if not configured) is 300 seconds:
+                  // timeout: 300
+                )
                 rtUpload (
                     buildName: JOB_NAME,
                     buildNumber: BUILD_NUMBER,
-                    serverId: "${SERVER_ID}", // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
+                    serverId: "artifactory-server", // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
                     spec: '''{
                               "files": [
                                  {
-                                  "pattern": "$WORKSPACE/Artifact_*",
+                                  "pattern": artifactory-serverArtifact_*",
                                   "target": "result/",
                                   "recursive": "false"
                                 } 
@@ -48,19 +63,46 @@ pipeline {
                //     buildNumber: BUILD_NUMBER,
                //     serverId: "${SERVER_ID}"
                // )
-
+               rtServer (
+                  id: 'artifactory-server',
+                  url: 'http://localhost:8082/artifactory',
+                  // If you're using username and password:
+                  // username: 'xxxx',
+                  // password: 'xxxxxxx',
+                  // If you're using Credentials ID:
+                  credentialsId: 'artifactory-id',
+                  // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
+                  // bypassProxy: true,
+                  // Configure the connection timeout (in seconds).
+                  // The default value (if not configured) is 300 seconds:
+                  // timeout: 300
+                )
                 rtPublishBuildInfo (
                     buildName: JOB_NAME,
                     buildNumber: BUILD_NUMBER,
-                    serverId: "${SERVER_ID}"
+                    serverId: 'artifactory-id'
                 )
             }
         }
          stage ('Add interactive promotion') {
             steps {
+                rtServer (
+                  id: 'artifactory-server',
+                  url: 'http://localhost:8082/artifactory',
+                  // If you're using username and password:
+                  // username: 'xxxx',
+                  // password: 'xxxxxxx',
+                  // If you're using Credentials ID:
+                  credentialsId: 'artifactory-id',
+                  // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
+                  // bypassProxy: true,
+                  // Configure the connection timeout (in seconds).
+                  // The default value (if not configured) is 300 seconds:
+                  // timeout: 300
+                )
                 rtAddInteractivePromotion (
                     //Mandatory parameter
-                    serverId: "${SERVER_ID}",
+                    serverId: 'artifactory-id',
 
                     //Optional parameters
                     targetRepo: 'result/',
@@ -76,7 +118,7 @@ pipeline {
                 )
 
                 rtAddInteractivePromotion (
-                    serverId: "${SERVER_ID}",
+                    serverId: 'artifactory-id',
                     buildName: JOB_NAME,
                     buildNumber: BUILD_NUMBER
                 )
