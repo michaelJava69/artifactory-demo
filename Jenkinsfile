@@ -33,7 +33,7 @@ pipeline {
                   // username: 'xxxx',
                   // password: 'xxxxxxx',
                   // If you're using Credentials ID:
-                  credentialsId: 'artifactory-id',
+                  credentialsId: 'articatory-id',
                   // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
                   // bypassProxy: true,
                   // Configure the connection timeout (in seconds).
