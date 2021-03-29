@@ -43,7 +43,7 @@ pipeline {
                 rtUpload (
                     buildName: JOB_NAME,
                     buildNumber: BUILD_NUMBER,
-                    serverId: "artifactory-server", // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
+                    serverId: 'artifactory-server', // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
                     spec: '''{
                               "files": [
                                  {
@@ -80,7 +80,7 @@ pipeline {
                 rtPublishBuildInfo (
                     buildName: JOB_NAME,
                     buildNumber: BUILD_NUMBER,
-                    serverId: 'artifactory-id'
+                    serverId: 'artifactory-server'
                 )
             }
         }
@@ -102,7 +102,7 @@ pipeline {
                 )
                 rtAddInteractivePromotion (
                     //Mandatory parameter
-                    serverId: 'artifactory-id',
+                    serverId: 'artifactory-server',
 
                     //Optional parameters
                     targetRepo: 'result/',
@@ -118,7 +118,7 @@ pipeline {
                 )
 
                 rtAddInteractivePromotion (
-                    serverId: 'artifactory-id',
+                    serverId: 'artifactory-server',
                     buildName: JOB_NAME,
                     buildNumber: BUILD_NUMBER
                 )
