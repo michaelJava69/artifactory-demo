@@ -29,10 +29,10 @@ pipeline {
                     id: "ARTIFACTORY_SERVER",
                     url: "${SERVER_URL}" , 
                     // If you're using username and password:
-                    //username: 'michael',
-                    //password: 'Azuk@123',
+                    username: 'michael',
+                    password: 'Azuk@123',
                     //url: SERVER_URL,
-                    credentialsId: 'articatory-id'
+                    //credentialsId: 'articatory-id'
                 )
                
                 rtUpload (
