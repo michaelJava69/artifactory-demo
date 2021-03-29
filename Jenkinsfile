@@ -27,31 +27,18 @@ pipeline {
             steps {
               rtServer (
                     id: "ARTIFACTORY_SERVER",
-                    url: SERVER_URL , 
+                    url: "${SERVER_URL}" , 
                     // If you're using username and password:
                     //username: 'michael',
                     //password: 'Azuk@123',
                     //url: SERVER_URL,
                     credentialsId: 'articatory-id'
                 )
-              rtServer (
-                  id: 'artifactory-server',
-                  url: 'http://localhost:8082/artifactory',
-                  // If you're using username and password:
-                  // username: 'xxxx',
-                  // password: 'xxxxxxx',
-                  // If you're using Credentials ID:
-                  credentialsId: 'articatory-id',
-                  // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
-                  // bypassProxy: true,
-                  // Configure the connection timeout (in seconds).
-                  // The default value (if not configured) is 300 seconds:
-                  // timeout: 300
-                )
+               
                 rtUpload (
                     buildName: JOB_NAME,
                     buildNumber: BUILD_NUMBER,
-                    serverId: 'artifactory-server', // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
+                    serverId: "ARTIFACTORY_SERVER", // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
                     spec: '''{
                               "files": [
                                  {
