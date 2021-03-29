@@ -12,17 +12,17 @@ pipeline {
 	
 	
 	  stages{
-	   stage('Build') {
-	       steps {
-	         script {
-	          dir("test")
-	            {
-	             sh  'touch $WORKSPACE/Artifact_$BUILD_NUMBER'
-	             sh 'echo "SERVER_URL is ${SERVER_URL}"'
-	            }
-	            }
-	          }
-	        }
+	        stage('Build') {
+	           steps {
+	             script {
+	              dir("test")
+	                {
+	                  sh  'touch $WORKSPACE/Artifact_$BUILD_NUMBER'
+	                  sh 'echo "SERVER_URL is ${SERVER_URL}"'
+	                }
+	             }
+	           }
+	         }
 	         stage ('Upload') {
 	            steps {
 	              rtServer (
