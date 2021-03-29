@@ -42,7 +42,7 @@ pipeline {
 	                    spec: '''{
 	                              "files": [
 	                                 {
-	                                  "pattern": "artifactory-serverArtifact_*",
+	                                  "pattern": "$WORKSPACE/Artifact_*",
 	                                  "target": "result/",
 	                                  "recursive": "false"
 	                                } 
