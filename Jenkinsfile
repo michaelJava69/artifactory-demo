@@ -7,7 +7,7 @@ pipeline {
 	          choices: 'http://localhost:8082/artifactory\nhttp://localhost:8082/artifactory',
 	          description: 'What artifacts repository?')
 	        choice(name: 'ARTIFACTORY_CREDS', 
-                  choices: 'artifactory-id\narticatory-id',
+                  choices: 'articatory-id\nartifactory-id',
                   description: 'Artifactory creds?') 
 	          
 	    }
