@@ -6,7 +6,9 @@ pipeline {
 	        choice(name: 'SERVER_URL', 
 	          choices: 'http://localhost:8082/artifactory\nhttp://localhost:8082/artifactory',
 	          description: 'What artifacts repository?')
-	         
+	        choice(name: 'ARTIFACTORY_CREDS', 
+                  choices: 'artifactory-id\narticatory-id',
+                  description: 'Artifactory creds?') 
 	          
 	    }
 	
@@ -32,7 +34,7 @@ pipeline {
 	                    //username: 'michael',
 	                    //password: 'Azuk@123',
 	                    //url: SERVER_URL,
-	                    credentialsId: 'articatory-id'
+	                    credentialsId: "${ARTIFACTORY_CREDS}"
 	                )
 	               
 	                rtUpload (
@@ -65,7 +67,7 @@ pipeline {
 	                  // username: 'xxxx',
 	                  // password: 'xxxxxxx',
 	                  // If you're using Credentials ID:
-	                  credentialsId: 'articatory-id',
+	                  credentialsId: "${ARTIFACTORY_CREDS}",
 	                  // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
 	                  // bypassProxy: true,
 	                  // Configure the connection timeout (in seconds).
@@ -88,7 +90,7 @@ pipeline {
 	                  // username: 'xxxx',
 	                  // password: 'xxxxxxx',
 	                  // If you're using Credentials ID:
-	                  credentialsId: 'articatory-id',
+	                  credentialsId: "${ARTIFACTORY_CREDS}",
 	                  // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
 	                  // bypassProxy: true,
 	                  // Configure the connection timeout (in seconds).
